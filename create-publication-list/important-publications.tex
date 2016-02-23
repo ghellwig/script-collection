@@ -1,0 +1,28 @@
+\documentclass[
+paper=a4,
+pagesize=auto,
+]{scrartcl}
+
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+
+\DeclareUnicodeCharacter{03C4}{\ensuremath{\tau}}
+\DeclareUnicodeCharacter{03BD}{\ensuremath{\nu}}
+\DeclareUnicodeCharacter{00A0}{ }
+\DeclareUnicodeCharacter{2009}{ }
+\DeclareUnicodeCharacter{2113}{\ensuremath{\ell}}
+\DeclareUnicodeCharacter{2212}{\ensuremath{-}}
+\DeclareUnicodeCharacter{03B3}{\ensuremath{\gamma}}
+\DeclareUnicodeCharacter{03C8}{\ensuremath{\psi}}
+\DeclareUnicodeCharacter{221A}{\ensuremath{\sqrt{}}}
+\DeclareUnicodeCharacter{03BC}{\ensuremath{\mu}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2032}{\ensuremath{^{'}}}
+
+\begin{document}
+\bibliographystyle{h-physrev}
+\nocite{*}
+\renewcommand{\refname}{Selected Publications}
+\bibliography{important-publications}
+\end{document}
