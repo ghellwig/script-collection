@@ -23,6 +23,7 @@ title
 type
 volume
 year
+archive
 }
 {}
 { label }
@@ -526,9 +527,27 @@ if$
 if$
 " \cite{" * crossref * "}" *
 }
+FUNCTION {format.collaboration}
+{ collaboration empty$
+    { "" }
+    { "{" collaboration * "}" * " Collaboration" * }
+  if$
+}
+FUNCTION {format.eprint}
+{ eprint empty$
+     { ""}
+     { archive empty$
+          {"\href{http://www.arXiv.org/abs/" eprint * "}" *
+             "{\texttt{ arXiv:" * eprint * "}}" *}
+          {"\href{" archive *  "/" * eprint * "}" *
+             "{\texttt{ " * eprint * "}}" *}
+       if$
+     }
+     if$
+}
 FUNCTION {article}
 { output.bibitem
-collaboration output
+format.collaboration output
 format.authors "author" output.check
 title output
 new.block
@@ -549,14 +568,14 @@ output
 format.pages output
 }
 if$
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {book}
 { output.bibitem
-collaboration output
+format.collaboration output
 author empty$
 { format.editors "author and editor" output.check }
 { format.authors output.nonnull
@@ -573,14 +592,14 @@ crossref missing$
 format.book.crossref output.nonnull
 }
 if$    
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {booklet}
 { output.bibitem
-collaboration output
+format.collaboration output
 format.authors output
 new.block
 format.title "title" output.check
@@ -588,14 +607,14 @@ howpublished address new.block.checkb
 howpublished output
 address output
 format.date output
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {inbook}
 { output.bibitem
-collaboration output
+format.collaboration output
 author empty$
 { format.editors "author and editor" output.check }
 { format.authors output.nonnull
@@ -613,14 +632,14 @@ new.block
 format.book.crossref output.nonnull
 }
 if$
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {incollection}
 { output.bibitem
-collaboration output
+format.collaboration output
 format.authors "author" output.check
 new.block
 format.title "title" output.check
@@ -640,14 +659,14 @@ format.date "year" output.check
 format.chapter.pages output
 }
 if$
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {inproceedings}
 { output.bibitem
-collaboration output
+format.collaboration output
 format.authors "author" output.check
 new.block
 format.title "title" output.check
@@ -675,7 +694,7 @@ if$
 format.pages output
 }
 if$
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
@@ -683,7 +702,7 @@ fin.entry
 FUNCTION {conference} { inproceedings }
 FUNCTION {manual}
 { output.bibitem
-collaboration output
+format.collaboration output
 author empty$
 { organization empty$
 'skip$
@@ -711,7 +730,7 @@ address output
 if$
 format.edition output
 format.date output
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
@@ -726,21 +745,21 @@ new.block
 school "school" output.check
 address output
 format.date "year" output.check
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {misc}
 { output.bibitem
-collaboration output
+format.collaboration output
 format.authors output
 title howpublished new.block.checkb
 format.title output
 howpublished new.block.checka
 howpublished output
 format.date output
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
@@ -756,14 +775,14 @@ new.block
 school "school" output.check
 address output
 format.date "year" output.check
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {proceedings}
 { output.bibitem
-collaboration output
+format.collaboration output
 editor empty$
 { organization output }
 { format.editors output.nonnull }
@@ -792,25 +811,25 @@ if$
 publisher output
 }
 if$
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {techreport}
 { output.bibitem
-collaboration output
+format.collaboration output
 format.authors "author" output.check
 new.block
 format.inst.tr.num.date output.nonnull
-eprint output
+format.eprint output
 new.block
 note output
 fin.entry
 }
 FUNCTION {unpublished}
 { output.bibitem
-collaboration output
+format.collaboration output
 format.authors "author" output.check
 new.block
 format.title "title" output.check
